@@ -1,49 +1,21 @@
-def main():
-    filename = input("Enter the input file: ")
-    try:
-        with open(filename, 'r') as file:
-            grades = [int(line.strip()) for line in file if line.strip().isdigit()]
-    except FileNotFoundError:
-        print(f"{filename} does not exist!")
-        return
+ Python program is designed to read a list of grades from a file, calculate the total points earned, maximum possible points, and determine the final grade and percentage. Here's a breakdown of how the code works and what it accomplishes:
 
-    number_grades = len(grades)
-    total_points = sum(grades)
-    max_points = number_grades * 100
+Functionality Overview
+File Input:
 
-    if number_grades == 0:
-        final_percentage = 0
-        final_grade = 'F'
-    else:
-        final_percentage = (total_points / max_points) * 100
-        final_grade = determine_letter_grade(final_percentage)
+The program prompts the user to enter the name of an input file containing grades.
+It attempts to open the file and read the grades, ensuring that only valid integers are processed. If the file doesn't exist, it catches a FileNotFoundError and prints an error message.
+Grade Calculation:
 
-    print()
-    print(f"Number of Grades:       {number_grades:>5}")
-    print(f"Total Points Earned:    {total_points:>5}")
-    print(f"Max Possible Points:    {max_points:>5}")
-    print()
+It calculates the number of grades, total points earned, and maximum possible points (assuming each grade is out of 100).
+If no grades are found, it sets the final percentage to 0 and assigns a letter grade of F.
+Otherwise, it computes the final percentage by dividing the total points by the maximum points and multiplying by 100.
+The determine_letter_grade function is called to determine the final letter grade based on the final percentage.
+Output:
 
-    for grade in grades:
-        percent = (grade / max_points) * 100
-        print(f"{grade:>20}{percent:>9.1f}%")
-
-    print()
-    print(f"{'Final Grade:':<8}{final_grade:>8}     {final_percentage:.1f}%")
-
-
-def determine_letter_grade(percentage):
-    if 90 <= percentage <= 100:
-        return 'A'
-    elif 80 <= percentage < 90:
-        return 'B'
-    elif 70 <= percentage < 80:
-        return 'C'
-    elif 60 <= percentage < 70:
-        return 'D'
-    else:
-        return 'F'
-
-
-if __name__ == "__main__":
-    main()
+The program prints a summary of the grades, including:
+The number of grades.
+The total points earned.
+The maximum possible points.
+For each grade, it prints the grade and its percentage relative to the maximum possible points.
+Finally, it displays the final letter grade and percentage.
